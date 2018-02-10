@@ -8,29 +8,22 @@ public class DemoArray {
         int[] arr = Arrays.stream(scanner.nextLine().split(" "))
                 .mapToInt(Integer::parseInt)
                 .toArray();
+        int[] counters = new int[arr.length];
 
-        int counter = 1;
         int counterMax = 0;
-        int position = 0;
+        int numberMax = 0;
 
-        for (int i = 0; i < arr.length-1; i++){
-            if (arr[i] < arr[i+1]){
-                counter++;
-                if(counter > counterMax){
-                    counterMax=counter;
-                    position = i+1;
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = i; j < arr.length; j++) {
+                if (arr[i] == arr[j]) {
+                    counters[i]++;
+                    if(counters[i]>counterMax){
+                        counterMax=counters[i];
+                        numberMax=arr[i];
+                    }
                 }
-            } else {
-                counter=1;
             }
-
         }
-        int[] result = new int[counterMax];
-
-        for (int i = 0; i < result.length; i++){
-            result[i] = arr[position-counterMax+1+i];
-            System.out.print(result[i] + " ");
-
-        }
+        System.out.println(numberMax);
     }
 }
