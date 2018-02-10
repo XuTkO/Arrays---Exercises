@@ -7,37 +7,29 @@ public class Demo {
         int[] numbers = Arrays.stream(scanner.nextLine().split(" "))
                 .mapToInt(Integer::parseInt)
                 .toArray();
-        int numRotates = Integer.parseInt(scanner.nextLine());
 
+        int k = numbers.length/4;
 
+        int[] upper = new int[numbers.length/2];
+        int[] lower = new int[numbers.length/2];
 
-        int[] sum = new int[numbers.length];
-
-
-        for (int a = 0; a < numRotates; a++){
-
-            numbers = Rotate(numbers);
-            for (int b = 0; b < numbers.length; b++){
-                sum[b]+=numbers[b];
-
-            }
-        }
-        for (int a = 0; a < sum.length; a++){
-            System.out.print(sum[a]+ " ");
+        for (int a = 0; a < 2*k; a++){
+            lower[a] = numbers[k+a];
         }
 
+        for (int b = 0; b < k; b++){
+            upper[b] = numbers[k-1-b];
         }
 
-    static int[] Rotate(int[] numbers) {
-        int[] rotated = new int[numbers.length];
-        int last = numbers[numbers.length-1];
-        for (int a = 1; a < numbers.length; a++){
-        rotated[a] = numbers[a-1];
+        for (int c = 0; c < k; c++){
+            upper[c+k] = numbers[4*k-1-c];
+        }
+
+        for (int d = 0; d < numbers.length/2; d++){
+            int sum = upper[d]+lower[d];
+            System.out.print(sum + " ");
 
         }
-        rotated[0] = last;
-        return rotated;
-
     }
 }
 
