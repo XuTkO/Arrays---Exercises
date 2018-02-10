@@ -5,25 +5,22 @@ public class DemoArray {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int[] arr = Arrays.stream(scanner.nextLine().split(" "))
-                .mapToInt(Integer::parseInt)
-                .toArray();
-        int[] counters = new int[arr.length];
-
-        int counterMax = 0;
-        int numberMax = 0;
-
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = i; j < arr.length; j++) {
-                if (arr[i] == arr[j]) {
-                    counters[i]++;
-                    if(counters[i]>counterMax){
-                        counterMax=counters[i];
-                        numberMax=arr[i];
-                    }
-                }
-            }
+        char[] alphabet = new char[26];
+        for (int i = 0; i < alphabet.length; i++){
+            alphabet[i] = (char)('a'+ i);
         }
-        System.out.println(numberMax);
+
+
+        char[] word = scanner.nextLine().toCharArray();
+        for (int i = 0; i < word.length; i++){
+            for (int j = 0; j < alphabet.length; j++){
+                if(word[i]==alphabet[j]){
+                    System.out.println(word[i] + " -> " + ((int)alphabet[j]-97));
+                }
+
+            }
+
+        }
+
     }
 }
