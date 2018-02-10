@@ -1,26 +1,23 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class DemoArray {
+public class Demo {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        char[] alphabet = new char[26];
-        for (int i = 0; i < alphabet.length; i++){
-            alphabet[i] = (char)('a'+ i);
-        }
+        int[] numbers = Arrays.stream(scanner.nextLine().split(" "))
+                        .mapToInt(Integer::parseInt)
+                        .toArray();
+        int loops = Integer.parseInt(scanner.nextLine());
+        int counter = 0;
 
-
-        char[] word = scanner.nextLine().toCharArray();
-        for (int i = 0; i < word.length; i++){
-            for (int j = 0; j < alphabet.length; j++){
-                if(word[i]==alphabet[j]){
-                    System.out.println(word[i] + " -> " + ((int)alphabet[j]-97));
+        for (int a = 0; a < numbers.length; a++) {
+            for (int b = 0; b < numbers.length; b++) {
+                if (numbers[a] == numbers[b] + loops) {
+                    counter++;
                 }
-
             }
-
         }
-
+        System.out.println(counter);
     }
 }
