@@ -1,44 +1,40 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Demo {
+public class DemoArray {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        char[] firstWord = scanner.nextLine().replaceAll(" ","").toCharArray();
-        char[] secondWord = scanner.nextLine().replaceAll(" ","").toCharArray();
+        int[] arr = Arrays.stream(scanner.nextLine().split(" "))
+                .mapToInt(Integer::parseInt)
+                .toArray();
 
-        boolean isFirst = false;
+        int counter = 1;
+        int counterMax = 0;
+        int numberMax = 0;
+        for (int i = 0; i < arr.length-1; i++){
+            if (arr[i] == arr[i+1]) {
+                counter++;
+            } else {
+                if(counter>counterMax){
+                    counterMax=counter;
 
-        for (int a = 0; a < Math.min(firstWord.length,secondWord.length); a++){
-            if (firstWord[a]<secondWord[a]){
-                isFirst=true;
-                break;
-            } else if (firstWord[a]>secondWord[a]) {
-                isFirst=false;
-                break;
-            }
-
-            if (a == Math.min(firstWord.length,secondWord.length)-1){
-                if(firstWord.length<secondWord.length){
-                    isFirst=true;
-                } else {
-                    isFirst=false;
+                    numberMax = arr[i];
                 }
+                counter=1;
             }
+            if(i+1==arr.length-1){
 
+                if(counter>counterMax){
+                    counterMax=counter;
+                    numberMax = arr[i];
+                }
+                counter=1;
+            }
         }
-        String copyFirst = String.valueOf(firstWord);
-        String copySecond = String.valueOf(secondWord);
-        if (isFirst){
-            System.out.println(copyFirst);
-            System.out.println(copySecond);
-        } else {
-            System.out.println(copySecond);
-            System.out.println(copyFirst);
+        for (int i = 0; i < counterMax; i++){
+            System.out.print(numberMax + " ");
 
         }
     }
 }
-
-
