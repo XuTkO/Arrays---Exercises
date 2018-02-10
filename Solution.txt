@@ -1,29 +1,44 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class DemoArray {
+public class Demo {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int n = Integer.parseInt(scanner.nextLine());
-        boolean[] boolArray = new boolean[n + 1];
-        for (int i = 0; i <= n; i++) {
-            boolArray[i] = true;
-        }
-        boolArray[0] = false;
-        boolArray[1] = false;
-        for (int i = 0; i < boolArray.length; i++) {
-            if (boolArray[i] == true) {
-                for (int a = 2; (a * i) <= n; a++) {
-                    boolArray[a * i] = false;
+        char[] firstWord = scanner.nextLine().replaceAll(" ","").toCharArray();
+        char[] secondWord = scanner.nextLine().replaceAll(" ","").toCharArray();
+
+        boolean isFirst = false;
+
+        for (int a = 0; a < Math.min(firstWord.length,secondWord.length); a++){
+            if (firstWord[a]<secondWord[a]){
+                isFirst=true;
+                break;
+            } else if (firstWord[a]>secondWord[a]) {
+                isFirst=false;
+                break;
+            }
+
+            if (a == Math.min(firstWord.length,secondWord.length)-1){
+                if(firstWord.length<secondWord.length){
+                    isFirst=true;
+                } else {
+                    isFirst=false;
                 }
             }
+
         }
-        for (int j = 2; j <= n; j++) {
-            if (boolArray[j] == true) {
-                System.out.print(j + " ");
-            }
+        String copyFirst = String.valueOf(firstWord);
+        String copySecond = String.valueOf(secondWord);
+        if (isFirst){
+            System.out.println(copyFirst);
+            System.out.println(copySecond);
+        } else {
+            System.out.println(copySecond);
+            System.out.println(copyFirst);
+
         }
-        System.out.println();
     }
 }
+
+
